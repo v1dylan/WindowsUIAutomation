@@ -1,0 +1,11 @@
+{
+  "name": "LogPackage",
+  "label": "Log Package",
+  "description": "Logs to file.",
+  "group": "",
+  "artifactName": "",
+  "packageVersion": "",
+  "codeVersion": "1.0",
+  "author": "Dylan",
+  "commands": []
+}
