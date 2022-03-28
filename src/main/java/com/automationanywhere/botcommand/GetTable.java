@@ -37,7 +37,10 @@ public class GetTable {
         if (RootTab != null) {
             DataGrid DataGrid = RootTab.getDataGrid(0);
             int RowCount = DataGrid.getRowCount();
-            DataGridCell Cell = DataGrid.getItem(0, 0);
+            List<DataGridCell> Header = DataGrid.getRowHeaders();
+            for (DataGridCell CurrentCell : Header) {
+                System.out.println(CurrentCell.getValue());
+            }
             System.out.println("Row Count: " + RowCount);
         }
         return null;
