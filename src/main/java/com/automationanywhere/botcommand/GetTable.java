@@ -16,7 +16,7 @@ import java.util.regex.Pattern;
 
 
 public class GetTable {
-    public Element FindDataGrid(String AppPath, String WindowTitle, String TargetViewportID,String ParentElementID, String TargetElementID) throws AutomationException {
+    public Element FindDataGrid(String AppPath, String WindowTitle, String TargetViewportID,String RootTabName, String TargetElementID) throws AutomationException {
         UIAutomation Automation = UIAutomation.getInstance();
         //Set window
         Window Window = Automation.getDesktopWindow(WindowTitle);
@@ -24,8 +24,21 @@ public class GetTable {
         //get tab item that holds data table
         Custom TargetViewport = Window.getCustomByAutomationId(TargetViewportID);
         Tab Tab = TargetViewport.getTab(0);
-        TabItem TabItem = Tab.getTabItems().get(0);
-        System.out.println(TabItem.getProcessId());
+        List<TabItem> TabItems = Tab.getTabItems();
+        TabItem RootTab = null;
+        for (TabItem CurrentTab : TabItems){
+            System.out.println(CurrentTab.getName());
+            if (CurrentTab.getName().equals(RootTabName)) {
+                System.out.println("Found");
+                RootTab = CurrentTab;
+                break;
+            }
+        }
+        if (RootTab != null) {
+            DataGrid DataGrid = RootTab.getDataGrid(0);
+            DataGridCell Cell = DataGrid.getItem(0, 0);
+            System.out.println(Cell.getValue());
+        }
         return null;
     }
 }
