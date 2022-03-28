@@ -23,7 +23,9 @@ public class GetTable {
         Window.focus();
         //get tab item that holds data table
         Custom TargetViewport = Window.getCustomByAutomationId(TargetViewportID);
-        System.out.println(TargetViewport.getProcessId());
+        Tab Tab = TargetViewport.getTab(0);
+        TabItem TabItem = Tab.getTabItems().get(0);
+        System.out.println(TabItem.getProcessId());
         return null;
     }
 }
