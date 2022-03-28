@@ -11,8 +11,9 @@ public class TestCommand {
         String WindowTitle = "Advantage - >> Agora Training Area <<";
         String ParentElement = "Omnistream Transactions (MSTOSM)";
         String TargetElementID = "c80_COLUMN_LIST";
+        String TargetViewportID = "c80_COLUMN_LIST";
 
         //eventToNewRelic.PostEvent(key, values);
-        GetTable1.FindDataGrid(AppPath, WindowTitle, ParentElement, TargetElementID);
+        GetTable1.FindDataGrid(AppPath, WindowTitle, TargetViewportID, ParentElement, TargetElementID);
     }
 }

@@ -16,18 +16,14 @@ import java.util.regex.Pattern;
 
 
 public class GetTable {
-    public Element FindDataGrid(String AppPath, String WindowTitle, String ParentElementID, String TargetElementID) throws AutomationException {
+    public Element FindDataGrid(String AppPath, String WindowTitle, String TargetViewportID,String ParentElementID, String TargetElementID) throws AutomationException {
         UIAutomation Automation = UIAutomation.getInstance();
-        //Attempt set application
-        Application Application = new Application(new ElementBuilder().automation(Automation).applicationPath(AppPath));
-        try {
-            Application.launchOrAttach();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        //Set window
         Window Window = Automation.getDesktopWindow(WindowTitle);
         Window.focus();
-        Window.getDataGrid(Search.getBuilder(ParentElementID).automationId(TargetElementID).build());
+        //get tab item that holds data table
+        Custom TargetViewport = Window.getCustomByAutomationId(TargetViewportID);
+        System.out.println(TargetViewport.getProcessId());
         return null;
     }
 }
