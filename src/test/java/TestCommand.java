@@ -7,10 +7,12 @@ public class TestCommand {
     public void TestGetGrid() throws AutomationException {
         GetTable GetTable1 = new GetTable();
 
-        String AppPath = "C:\\Users\\14103\\AppData\\Local\\Apps\\2.0\\2QBZNMY9.3DO\\X5W75V27.6OA\\crm...tion_a1f3476ec230d85b_07e6.0001_876125b32c332a27\\CRM.exe";
-        String WindowTitle = "CRM Application - Built with Progress® Telerik® UI for WPF";
+        String AppPath = "\\\\ADV-APP-T2\\AdvTrain\\Advantage\\v_2019.8.10310\\run\\Advantage-UI.exe";
+        String WindowTitle = "Advantage - >> Agora Training Area <<";
+        String ParentElement = "Omnistream Transactions (MSTOSM)";
+        String TargetElementID = "c80_COLUMN_LIST";
 
         //eventToNewRelic.PostEvent(key, values);
-        GetTable1.FindDataGrid(AppPath, WindowTitle, "opportunitiesTabItem", "opportunitiesGrid");
+        GetTable1.FindDataGrid(AppPath, WindowTitle, ParentElement, TargetElementID);
     }
 }
