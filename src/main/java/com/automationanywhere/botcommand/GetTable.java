@@ -43,9 +43,11 @@ public class GetTable {
             }
             System.out.println("Row Count: " + RowCount);
             for (int i = 0; i < RowCount; i++){
-                DataGrid.getRow()
+                List<DataGridCell> CurrentCells = DataGrid.getRow(i);
+                for (DataGridCell Cell : CurrentCells){
+                    System.out.println(Cell.getValue());
+                }
             }
-            DataGrid.getRow()
         }
         return null;
     }
