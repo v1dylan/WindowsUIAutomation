@@ -7,10 +7,10 @@ public class TestCommand {
     public void TestGetGrid() throws AutomationException {
         GetTable GetTable1 = new GetTable();
 
-        String AppPath = "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\Common7\\IDE\\devenv.exe";
-        String WindowTitle = "Microsoft Visual Studio";
+        String AppPath = "C:\\Users\\14103\\AppData\\Local\\Apps\\2.0\\2QBZNMY9.3DO\\X5W75V27.6OA\\crm...tion_a1f3476ec230d85b_07e6.0001_876125b32c332a27\\CRM.exe";
+        String WindowTitle = "CRM Application - Built with Progress® Telerik® UI for WPF";
 
         //eventToNewRelic.PostEvent(key, values);
-        GetTable1.GetTable(AppPath, WindowTitle, "PART_MruProjectItemABE", "ProgrammingAssignment");
+        GetTable1.FindDataGrid(AppPath, WindowTitle, "opportunitiesTabItem", "opportunitiesGrid");
     }
 }
