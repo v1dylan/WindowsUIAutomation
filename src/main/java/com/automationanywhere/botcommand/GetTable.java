@@ -30,7 +30,6 @@ public class GetTable {
         List<TabItem> TabItems = Tab.getTabItems();
         TabItem RootTab = null;
         for (TabItem CurrentTab : TabItems){
-            System.out.println(CurrentTab.getName());
             if (CurrentTab.getName().equals(RootTabName)) {
                 RootTab = CurrentTab;
                 break;
@@ -56,6 +55,7 @@ public class GetTable {
             List<DataGridCell> Headers = DataGrid.getColumnHeaders();
             List<Value> HeaderValues = null;
             for (DataGridCell Header : Headers) {
+                System.out.println(Header.getName());
                 HeaderValues.add(new StringValue(Header.getName()));
             }
             HeaderRow.setValues(HeaderValues);
