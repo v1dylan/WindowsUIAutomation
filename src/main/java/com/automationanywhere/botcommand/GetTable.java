@@ -5,17 +5,12 @@ import com.automationanywhere.botcommand.data.impl.StringValue;
 import com.automationanywhere.botcommand.data.model.table.Row;
 import com.automationanywhere.botcommand.data.model.table.Table;
 import mmarquee.automation.AutomationException;
-import mmarquee.automation.AutomationTreeWalker;
-import mmarquee.automation.AutomationTreeWalker.AutomationElementVisitor;
-import mmarquee.automation.Element;
 import mmarquee.automation.UIAutomation;
 import mmarquee.automation.controls.*;
-import mmarquee.uiautomation.IUIAutomationElement;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+
 
 
 public class GetTable {
@@ -35,9 +30,8 @@ public class GetTable {
                 break;
             }
         }
-        DataGrid DataGrid = null;
         if (RootTab != null) {
-            DataGrid = RootTab.getDataGrid(0);
+            DataGrid DataGrid = RootTab.getDataGrid(0);
             return DataGrid;
         }
         else {
@@ -68,12 +62,11 @@ public class GetTable {
             TableRows.add(HeaderRow);
         }
 
+        //Set rows
         int RowCount = DataGrid.getRowCount();
         int ColumnCount = DataGrid.getColumnCount();
-        System.out.println(RowCount + "Rows");
-        System.out.println(DataGrid.getItem(1,1).getName());
 
-        for (int i = 0;i < 5; i++ ) {
+        for (int i = 0;i < RowCount; i++ ) {
             Row CurrentRow = new Row();
             List<Value> RowValues = new ArrayList<>();
             for (int g = 0; g < ColumnCount; g++) {
@@ -82,9 +75,8 @@ public class GetTable {
                 TableRows.add(CurrentRow);
             }
         }
-        System.out.println(TableRows.size());
         Table.setRows(TableRows);
-        return null;
+        return Table;
     }
 }
 
