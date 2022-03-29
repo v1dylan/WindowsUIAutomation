@@ -74,11 +74,16 @@ public class GetTable {
         System.out.println(DataGrid.getItem(1,1).getName());
 
         for (int i = 0;i < 5; i++ ) {
+            Row CurrentRow = new Row();
+            List<Value> RowValues = new ArrayList<>();
             for (int g = 0; g < ColumnCount; g++) {
-                System.out.println("Row " + i + " -- "+ DataGrid.getItem(i, g).getValue());
+                RowValues.add(new StringValue(DataGrid.getItem(i,g).getValue()));
+                CurrentRow.setValues(RowValues);
+                TableRows.add(CurrentRow);
             }
         }
-
+        System.out.println(TableRows.size());
+        Table.setRows(TableRows);
         return null;
     }
 }
