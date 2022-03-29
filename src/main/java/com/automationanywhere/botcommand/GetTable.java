@@ -56,10 +56,15 @@ public class GetTable {
             List<Value> HeaderValues = null;
             for (DataGridCell Header : Headers) {
                 System.out.println(Header.getName());
-                HeaderValues.add(new StringValue(Header.getName()));
+                String CurrentHeader = Header.getName();
+                StringValue String = new StringValue(CurrentHeader);
+                if (String != null) {
+                HeaderValues.add(String);
+                }
             }
             HeaderRow.setValues(HeaderValues);
-            TableRows.add(HeaderRow);
+            System.out.println(HeaderRow.toString());
+            //TableRows.add(HeaderRow);
         }
         System.out.println(TableRows.get(0).toString());
         return null;
