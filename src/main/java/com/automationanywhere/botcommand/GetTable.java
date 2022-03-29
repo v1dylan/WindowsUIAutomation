@@ -71,11 +71,11 @@ public class GetTable {
         int RowCount = DataGrid.getRowCount();
         int ColumnCount = DataGrid.getColumnCount();
         System.out.println(RowCount + "Rows");
-        System.out.println(DataGrid.getItem(1,1));
+        System.out.println(DataGrid.getItem(1,1).getName());
 
         for (int i = 0;i < 5; i++ ) {
             for (int g = 0; g < ColumnCount; g++) {
-                System.out.println(DataGrid.getItem(i, g));
+                System.out.println("Row " + i + " -- "+ DataGrid.getItem(i, g).getValue());
             }
         }
 
