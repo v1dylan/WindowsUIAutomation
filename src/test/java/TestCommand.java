@@ -1,5 +1,6 @@
 import com.automationanywhere.botcommand.GetTable;
 import mmarquee.automation.AutomationException;
+import mmarquee.automation.controls.DataGrid;
 import org.testng.annotations.Test;
 @Test
 
@@ -14,6 +15,7 @@ public class TestCommand {
         String TargetViewportID = "mainDataViewPort";
 
         //eventToNewRelic.PostEvent(key, values);
-        GetTable1.FindDataGrid(AppPath, WindowTitle, TargetViewportID, RootTabName, TargetElementID);
+        DataGrid ReturnedGrid = GetTable1.FindDataGrid(AppPath, WindowTitle, TargetViewportID, RootTabName, TargetElementID);
+        GetTable1.DataGridToAATable(ReturnedGrid, true);
     }
 }

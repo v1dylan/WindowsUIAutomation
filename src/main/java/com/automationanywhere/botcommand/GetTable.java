@@ -1,5 +1,6 @@
 package com.automationanywhere.botcommand;
 
+import com.automationanywhere.botcommand.data.model.table.Row;
 import com.automationanywhere.botcommand.data.model.table.Table;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.AutomationTreeWalker;
@@ -16,7 +17,7 @@ import java.util.regex.Pattern;
 
 
 public class GetTable {
-    public Element FindDataGrid(String AppPath, String WindowTitle, String TargetViewportID,String RootTabName, String TargetElementID) throws AutomationException {
+    public DataGrid FindDataGrid(String AppPath, String WindowTitle, String TargetViewportID,String RootTabName, String TargetElementID) throws AutomationException {
         UIAutomation Automation = UIAutomation.getInstance();
         //Set window
         Window Window = Automation.getDesktopWindow(WindowTitle);
@@ -29,26 +30,31 @@ public class GetTable {
         for (TabItem CurrentTab : TabItems){
             System.out.println(CurrentTab.getName());
             if (CurrentTab.getName().equals(RootTabName)) {
-                System.out.println("Found");
                 RootTab = CurrentTab;
                 break;
             }
         }
+        DataGrid DataGrid = null;
         if (RootTab != null) {
-            DataGrid DataGrid = RootTab.getDataGrid(0);
-            int RowCount = DataGrid.getRowCount();
-            List<DataGridCell> Header = DataGrid.getColumnHeaders();
-            for (DataGridCell CurrentCell : Header) {
-                System.out.println("Current Cell: " + CurrentCell.getName());
-            }
-            System.out.println("Row Count: " + RowCount);
-            for (int i = 0; i < RowCount; i++){
-                List<DataGridCell> CurrentCells = DataGrid.getRow(i);
-                for (DataGridCell Cell : CurrentCells){
-                    System.out.println(Cell.getValue());
-                }
+            DataGrid = RootTab.getDataGrid(0);
+            return DataGrid;
+        }
+        else {
+            return null;
+        }
+    }
+
+    /*-------------- Data grid to AA Table ----------------------*/
+
+    public Table DataGridToAATable(DataGrid DataGrid, boolean IncludeHeader) throws AutomationException {
+        Table Table = null;
+        if (IncludeHeader) {
+            List<DataGridCell> Headers = DataGrid.getColumnHeaders();
+            for (DataGridCell Header : Headers) {
+                System.out.println("Header: " + Header.getName());
             }
         }
+
         return null;
     }
 }
