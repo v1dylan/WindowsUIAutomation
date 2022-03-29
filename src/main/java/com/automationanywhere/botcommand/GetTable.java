@@ -72,7 +72,12 @@ public class GetTable {
         int ColumnCount = DataGrid.getColumnCount();
         System.out.println(RowCount + "Rows");
         System.out.println(DataGrid.getItem(1,1));
-        DataGrid.getRow(1);
+
+        for (int i = 0;i < 5; i++ ) {
+            for (int g = 0; g < ColumnCount; g++) {
+                System.out.println(DataGrid.getItem(i, g));
+            }
+        }
 
         return null;
     }
