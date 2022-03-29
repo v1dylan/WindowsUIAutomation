@@ -1,5 +1,7 @@
 package com.automationanywhere.botcommand;
 
+import com.automationanywhere.botcommand.data.Value;
+import com.automationanywhere.botcommand.data.impl.StringValue;
 import com.automationanywhere.botcommand.data.model.table.Row;
 import com.automationanywhere.botcommand.data.model.table.Table;
 import mmarquee.automation.AutomationException;
@@ -48,13 +50,18 @@ public class GetTable {
 
     public Table DataGridToAATable(DataGrid DataGrid, boolean IncludeHeader) throws AutomationException {
         Table Table = null;
+        List<Row> TableRows = null;
+        Row HeaderRow = null;
         if (IncludeHeader) {
             List<DataGridCell> Headers = DataGrid.getColumnHeaders();
+            List<Value> HeaderValues = null;
             for (DataGridCell Header : Headers) {
-                System.out.println("Header: " + Header.getName());
+                HeaderValues.add(new StringValue(Header.getName()));
             }
+            HeaderRow.setValues(HeaderValues);
+            TableRows.add(HeaderRow);
         }
-
+        System.out.println(TableRows.get(0).toString());
         return null;
     }
 }
