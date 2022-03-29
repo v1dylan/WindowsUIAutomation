@@ -70,7 +70,7 @@ public class GetTable {
 
         int RowCount = DataGrid.getRowCount();
         System.out.println(RowCount + "Rows");
-        System.out.println(DataGrid.getRow(1).get(1));
+        System.out.println(DataGrid.getItem(1,1));
 
         return null;
     }
