@@ -69,8 +69,10 @@ public class GetTable {
         }
 
         int RowCount = DataGrid.getRowCount();
+        int ColumnCount = DataGrid.getColumnCount();
         System.out.println(RowCount + "Rows");
         System.out.println(DataGrid.getItem(1,1));
+        DataGrid.getRow(1);
 
         return null;
     }
