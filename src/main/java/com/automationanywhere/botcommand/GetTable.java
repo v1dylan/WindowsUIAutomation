@@ -49,24 +49,23 @@ public class GetTable {
 
     public Table DataGridToAATable(DataGrid DataGrid, boolean IncludeHeader) throws AutomationException {
         Table Table = null;
-        List<Row> TableRows = null;
-        Row HeaderRow = null;
+        List<Row> TableRows = new ArrayList<>();
+        Row HeaderRow = new Row();
         if (IncludeHeader) {
             List<DataGridCell> Headers = DataGrid.getColumnHeaders();
-            List<Value> HeaderValues = null;
+            List<Value> HeaderValues = new ArrayList<>();
             for (DataGridCell Header : Headers) {
                 System.out.println(Header.getName());
                 String CurrentHeader = Header.getName();
-                StringValue String = new StringValue(CurrentHeader);
-                if (String != null) {
-                HeaderValues.add(String);
+                StringValue String1 = new StringValue(CurrentHeader);
+                if (String1 != null) {
+                HeaderValues.add(String1);
                 }
             }
             HeaderRow.setValues(HeaderValues);
-            System.out.println(HeaderRow.toString());
-            //TableRows.add(HeaderRow);
+            TableRows.add(HeaderRow);
         }
-        System.out.println(TableRows.get(0).toString());
+        System.out.println(TableRows.get(0).getValues().get(0));
         return null;
     }
 }
