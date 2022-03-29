@@ -69,10 +69,9 @@ public class GetTable {
         }
 
         int RowCount = DataGrid.getRowCount();
-        for (int i = 0; i > RowCount; i++) {
-            System.out.println(DataGrid.getRow(i));
-        }
-        System.out.println(TableRows.get(0).getValues().get(0));
+        System.out.println(RowCount + "Rows");
+        System.out.println(DataGrid.getRow(1).get(1));
+
         return null;
     }
 }
