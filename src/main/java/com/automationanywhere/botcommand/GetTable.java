@@ -2,11 +2,15 @@ package com.automationanywhere.botcommand;
 
 import com.automationanywhere.botcommand.data.Value;
 import com.automationanywhere.botcommand.data.impl.StringValue;
+import com.automationanywhere.botcommand.data.model.Point;
 import com.automationanywhere.botcommand.data.model.table.Row;
 import com.automationanywhere.botcommand.data.model.table.Table;
+import com.sun.jna.platform.win32.WinDef;
 import mmarquee.automation.AutomationException;
+import mmarquee.automation.Element;
 import mmarquee.automation.UIAutomation;
 import mmarquee.automation.controls.*;
+import mmarquee.automation.pattern.Selection;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +18,7 @@ import java.util.List;
 
 
 public class GetTable {
-    public DataGrid FindDataGrid(String AppPath, String WindowTitle, String TargetViewportID,String RootTabName, String TargetElementID) throws AutomationException {
+    public DataGrid FindDataGrid(String WindowTitle, String TargetViewportID,String RootTabName) throws AutomationException {
         UIAutomation Automation = UIAutomation.getInstance();
         //Set window
         Window Window = Automation.getDesktopWindow(WindowTitle);
@@ -74,9 +78,11 @@ public class GetTable {
                 CurrentRow.setValues(RowValues);
                 TableRows.add(CurrentRow);
             }
+            DataGridCell Cell = DataGrid.getItem(1,1);
         }
         Table.setRows(TableRows);
         return Table;
     }
+
 }
 
