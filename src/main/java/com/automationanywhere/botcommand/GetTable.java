@@ -19,24 +19,22 @@ public class GetTable {
         //Set window
         Window Window = Automation.getDesktopWindow(WindowTitle);
         Window.focus();
-        //get tab item that holds data table
+        //get viewport in advantage
         Custom TargetViewport = Window.getCustomByAutomationId(TargetViewportID);
-        Tab Tab = TargetViewport.getTab(0);
-        List<TabItem> TabItems = Tab.getTabItems();
-        TabItem RootTab = null;
-        for (TabItem CurrentTab : TabItems){
-            if (CurrentTab.getName().equals(RootTabName)) {
-                RootTab = CurrentTab;
-                break;
+        //Find correct tab item under viewport
+        TabItem Tab = null;
+        for (int i = 0; i < 10; i++ ) {
+            List<TabItem> TabItems = TargetViewport.getTab(i).getTabItems();
+            for (TabItem Current : TabItems) {
+                if (Current.getName().equals(RootTabName)) {
+                    Tab = Current;
+                    break;
+                }
             }
+            if (Tab != null) {break;}
         }
-        if (RootTab != null) {
-            DataGrid DataGrid = RootTab.getDataGrid(0);
-            return DataGrid;
-        }
-        else {
-            return null;
-        }
+        DataGrid DataGrid = Tab.getDataGrid(0);
+        return DataGrid;
     }
 
     /*-------------- Data grid to AA Table ----------------------*/

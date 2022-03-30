@@ -1,14 +1,10 @@
 package com.automationanywhere.botcommand;
 
-import com.automationanywhere.botcommand.data.Value;
-import com.automationanywhere.botcommand.data.impl.ListValue;
-import com.automationanywhere.botcommand.data.impl.StringValue;
 import mmarquee.automation.AutomationException;
-import mmarquee.automation.Element;
+
 import mmarquee.automation.UIAutomation;
 import mmarquee.automation.controls.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class GetElementTesting {
@@ -17,8 +13,9 @@ public class GetElementTesting {
         //Set window
         Window Window = Automation.getDesktopWindow(WindowTitle);
         Window.focus();
-        //get tab item that holds data table
+        //get viewport in advantage
         Custom TargetViewport = Window.getCustomByAutomationId(TargetViewportID);
+        //Find correct tab item under viewport
         TabItem Tab = null;
         for (int i = 0; i < 10; i++ ) {
            List<TabItem> TabItems = TargetViewport.getTab(i).getTabItems();
@@ -31,6 +28,5 @@ public class GetElementTesting {
             if (Tab != null) {break;}
         }
         DataGrid DataGrid = Tab.getDataGrid(0);
-        System.out.println(DataGrid.getItem(0, 0).getValue());
     }
 }
