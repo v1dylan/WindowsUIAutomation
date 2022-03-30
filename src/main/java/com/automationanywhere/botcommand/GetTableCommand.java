@@ -1,6 +1,5 @@
 package com.automationanywhere.botcommand;
 import com.automationanywhere.botcommand.data.Value;
-import com.automationanywhere.botcommand.data.impl.StringValue;
 import com.automationanywhere.botcommand.data.impl.TableValue;
 import com.automationanywhere.botcommand.data.model.table.Table;
 import com.automationanywhere.botcommand.exception.BotCommandException;
@@ -10,33 +9,30 @@ import com.automationanywhere.commandsdk.annotations.Execute;
 import com.automationanywhere.commandsdk.annotations.Idx;
 import com.automationanywhere.commandsdk.annotations.Pkg;
 import com.automationanywhere.commandsdk.annotations.rules.NotEmpty;
-import com.automationanywhere.commandsdk.i18n.Messages;
-import com.automationanywhere.commandsdk.i18n.MessagesFactory;
+import com.automationanywhere.commandsdk.model.AttributeType;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.controls.DataGrid;
 
+import java.io.CharArrayWriter;
+import java.io.PrintWriter;
+
 import static com.automationanywhere.commandsdk.model.AttributeType.TEXT;
-import static com.automationanywhere.commandsdk.model.DataType.STRING;
+import static com.automationanywhere.commandsdk.model.DataType.BOOLEAN;
 import static com.automationanywhere.commandsdk.model.DataType.TABLE;
 
-//BotCommand makes a class eligible for being considered as an action.
+
 @BotCommand
 
-//CommandPks adds required information to be dispalable on GUI.
+
 @CommandPkg(
         //Unique name inside a package and label to display.
-        name = "concatenate", label = "[[Concatenate.label]]",
+        name = "GetAdvantageTable", label = "Get Advantage Table",
         node_label = "[[Concatenate.node_label]]", description = "[[Concatenate.description]]", icon = "pkg.svg",
 
         //Return type information. return_type ensures only the right kind of variable is provided on the UI.
         return_label = "[[Concatenate.return_label]]", return_type = TABLE, return_required = true)
 
-public class GetTableCommand {
-    //Messages read from full qualified property file name and provide i18n capability.
-    private static final Messages MESSAGES = MessagesFactory
-            .getMessages("com.automationanywhere.botcommand.samples.messages");
-
-    //Identify the entry point for the action. Returns a Value<String> because the return type is String.
+public class GetTableCommand{
     @Execute
     public Value<Table> action(
             @Idx(index = "1", type = TEXT)
@@ -52,14 +48,42 @@ public class GetTableCommand {
             @Idx(index = "3", type = TEXT)
             @Pkg(label = "Root Tab Name")
             @NotEmpty
-                    String RootTabName) throws AutomationException {
+                    String RootTabName,
+            @Idx(index = "4", type = AttributeType.BOOLEAN)
+            @Pkg(label = "Get Header?")
+            @NotEmpty
+                    Boolean IncludeHeader) throws AutomationException {
 
             Table table = new Table();
             GetTable getTable = new GetTable();
+            DataGrid DataGrid = null;
 
-            DataGrid DataGrid = getTable.FindDataGrid(WindowTitle, ParentViewportID, RootTabName);
+            try {
+                DataGrid = getTable.FindDataGrid(WindowTitle, ParentViewportID, RootTabName);
+                if (DataGrid == null) {
+                    throw new BotCommandException("DataTable not found");
+                }
+            }
+            catch (Exception e) {
+                CharArrayWriter cw = new CharArrayWriter();
+                PrintWriter w = new PrintWriter(cw);
+                e.printStackTrace(w);
+                w.close();
+                String trace = cw.toString();
+                throw new BotCommandException("Unable to locate datatable: " + trace);
+            }
+            try {
+                table = getTable.DataGridToAATable(DataGrid, IncludeHeader);
+            }
+            catch (Exception e) {
+                CharArrayWriter cw = new CharArrayWriter();
+                PrintWriter w = new PrintWriter(cw);
+                e.printStackTrace(w);
+                w.close();
+                String trace = cw.toString();
+                throw new BotCommandException("Unable to locate datatable: " + trace);
+            }
 
-            table = getTable.DataGridToAATable(DataGrid, false);
 
 
 

@@ -1,11 +1,11 @@
 {
-  "name": "LogPackage",
-  "label": "Log Package",
-  "description": "Logs to file.",
+  "name": "AdvantageAutomation",
+  "label": "Advantage Automation",
+  "description": "Provides actions to automate Advantage",
   "group": "",
   "artifactName": "",
   "packageVersion": "",
   "codeVersion": "1.0",
-  "author": "Dylan",
+  "author": "Dylan Lesperance",
   "commands": []
 }

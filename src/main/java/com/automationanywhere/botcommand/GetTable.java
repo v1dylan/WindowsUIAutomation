@@ -51,7 +51,6 @@ public class GetTable {
             Row HeaderRow = new Row();
             List<Value> HeaderValues = new ArrayList<>();
             for (DataGridCell Header : Headers) {
-                System.out.println(Header.getName());
                 String CurrentHeader = Header.getName();
                 StringValue String1 = new StringValue(CurrentHeader);
                 if (String1 != null) {
