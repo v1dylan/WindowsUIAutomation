@@ -14,12 +14,13 @@ public class TestCommand {
         GetTableCommand TestCommand = new GetTableCommand();
 
         String WindowTitle = "Advantage - >> Agora Production Area <<";
+        String ParentViewportID = "mainDataViewPort";
         String RootTabName = "Omnistream Transactions (MSTOSM)";
-        String TargetViewportID = "mainDataViewPort";
+
 
         //eventToNewRelic.PostEvent(key, values);
         Value<Table> TableValue = new TableValue();
-        TableValue = TestCommand.action("", WindowTitle, RootTabName, TargetViewportID);
+        TableValue = TestCommand.action(WindowTitle, ParentViewportID, RootTabName);
         Table Table = TableValue.get();
         List<Row> Rows = Table.getRows();
         for (Row CurrentRow: Rows) {

@@ -39,23 +39,17 @@ public class GetTableCommand {
     //Identify the entry point for the action. Returns a Value<String> because the return type is String.
     @Execute
     public Value<Table> action(
-
             @Idx(index = "1", type = TEXT)
-            @Pkg(label = "Application Path")
-            @NotEmpty
-                    String ApplicationPath,
-
-            @Idx(index = "2", type = TEXT)
             @Pkg(label = "Window Title")
             @NotEmpty
                     String WindowTitle,
 
-            @Idx(index = "3", type = TEXT)
+            @Idx(index = "2", type = TEXT)
             @Pkg(label = "Parent Viewport ID")
             @NotEmpty
                     String ParentViewportID,
 
-            @Idx(index = "4", type = TEXT)
+            @Idx(index = "3", type = TEXT)
             @Pkg(label = "Root Tab Name")
             @NotEmpty
                     String RootTabName) throws AutomationException {
