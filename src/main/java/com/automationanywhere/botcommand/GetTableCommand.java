@@ -12,6 +12,8 @@ import com.automationanywhere.commandsdk.annotations.Pkg;
 import com.automationanywhere.commandsdk.annotations.rules.NotEmpty;
 import com.automationanywhere.commandsdk.i18n.Messages;
 import com.automationanywhere.commandsdk.i18n.MessagesFactory;
+import mmarquee.automation.AutomationException;
+import mmarquee.automation.controls.DataGrid;
 
 import static com.automationanywhere.commandsdk.model.AttributeType.TEXT;
 import static com.automationanywhere.commandsdk.model.DataType.STRING;
@@ -54,15 +56,16 @@ public class GetTableCommand {
                     String ParentViewportID,
 
             @Idx(index = "4", type = TEXT)
-            @Pkg(label = "Target Element ID")
+            @Pkg(label = "Root Tab Name")
             @NotEmpty
-                    String TargetElementID) {
+                    String RootTabName) throws AutomationException {
 
             Table table = new Table();
             GetTable getTable = new GetTable();
 
-            getTable.FindDataGrid(WindowTitle, ParentViewportID,)
+            DataGrid DataGrid = getTable.FindDataGrid(WindowTitle, ParentViewportID,RootTabName);
 
+            table = getTable.DataGridToAATable(DataGrid, false);
 
 
 
