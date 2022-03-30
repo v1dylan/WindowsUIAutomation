@@ -57,10 +57,6 @@ public class GetTableCommand {
             Table table = new Table();
             GetTable getTable = new GetTable();
 
-            System.out.println("Window Title: " + WindowTitle);
-            System.out.println("Viewport ID: " + ParentViewportID);
-            System.out.println("Root tab name: " + RootTabName);
-
             DataGrid DataGrid = getTable.FindDataGrid(WindowTitle, ParentViewportID, RootTabName);
 
             table = getTable.DataGridToAATable(DataGrid, false);

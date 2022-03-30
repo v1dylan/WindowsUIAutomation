@@ -20,13 +20,6 @@ public class GetTable {
         Window Window = Automation.getDesktopWindow(WindowTitle);
         Window.focus();
         //get tab item that holds data table
-        /*List<AutomationBase> Elements = Window.getChildren(false);
-        int i = 0;
-        for (AutomationBase Current : Elements) {
-            i++;
-            System.out.println("Element " + i + " " + Current.getElement().getAutomationId());
-            System.out.println("Element " + i + " " + Current.getElement().getName());
-        }*/
         Custom TargetViewport = Window.getCustomByAutomationId(TargetViewportID);
         Tab Tab = TargetViewport.getTab(0);
         List<TabItem> TabItems = Tab.getTabItems();
@@ -78,10 +71,9 @@ public class GetTable {
             List<Value> RowValues = new ArrayList<>();
             for (int g = 0; g < ColumnCount; g++) {
                 RowValues.add(new StringValue(DataGrid.getItem(i,g).getValue()));
-                CurrentRow.setValues(RowValues);
-                TableRows.add(CurrentRow);
             }
-            DataGridCell Cell = DataGrid.getItem(1,1);
+            CurrentRow.setValues(RowValues);
+            TableRows.add(CurrentRow);
         }
         Table.setRows(TableRows);
         return Table;
