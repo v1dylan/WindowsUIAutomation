@@ -24,6 +24,13 @@ public class GetTable {
         Window Window = Automation.getDesktopWindow(WindowTitle);
         Window.focus();
         //get tab item that holds data table
+        List<AutomationBase> Elements = Window.getChildren(false);
+        int i = 0;
+        for (AutomationBase Current : Elements) {
+            i++;
+            System.out.println("Element " + i + " " + Current.getElement().getAutomationId());
+            System.out.println("Element " + i + " " + Current.getElement().getName());
+        }
         Custom TargetViewport = Window.getCustomByAutomationId(TargetViewportID);
         Tab Tab = TargetViewport.getTab(0);
         List<TabItem> TabItems = Tab.getTabItems();
