@@ -12,8 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-
 public class GetTable {
+    /*----------------------Get data grid in advantage-------------------------*/
     public DataGrid FindDataGrid(String WindowTitle, String TargetViewportID, String RootTabName) throws AutomationException {
         UIAutomation Automation = UIAutomation.getInstance();
         //Set window
@@ -23,7 +23,7 @@ public class GetTable {
         Custom TargetViewport = Window.getCustomByAutomationId(TargetViewportID);
         //Find correct tab item under viewport
         TabItem Tab = null;
-        for (int i = 0; i < 10; i++ ) {
+        for (int i = 0; i < 10; i++) {
             List<TabItem> TabItems = TargetViewport.getTab(i).getTabItems();
             for (TabItem Current : TabItems) {
                 if (Current.getName().equals(RootTabName)) {
@@ -31,9 +31,43 @@ public class GetTable {
                     break;
                 }
             }
-            if (Tab != null) {break;}
+            if (Tab != null) {
+                break;
+            }
         }
         DataGrid DataGrid = Tab.getDataGrid(0);
+        return DataGrid;
+    }
+
+    /*----------------------Get data grid in advantage advanced-------------------------*/
+    public DataGrid FindDataGridAdv(String WindowTitle, String TargetViewportID, String RootTabName, String FirstHeader) throws AutomationException {
+        UIAutomation Automation = UIAutomation.getInstance();
+        //Set window
+        Window Window = Automation.getDesktopWindow(WindowTitle);
+        Window.focus();
+        //get viewport in advantage
+        Custom TargetViewport = Window.getCustomByAutomationId(TargetViewportID);
+        //Find correct tab item under viewport
+        TabItem Tab = null;
+        for (int i = 0; i < 10; i++) {
+            List<TabItem> TabItems = TargetViewport.getTab(i).getTabItems();
+            for (TabItem Current : TabItems) {
+                if (Current.getName().equals(RootTabName)) {
+                    Tab = Current;
+                    break;
+                }
+            }
+            if (Tab != null) {
+                break;
+            }
+        }
+        DataGrid DataGrid = null;
+        for (int i = 0; i < 10; i++) {
+            if (Tab.getDataGrid(i).getColumnHeaders().get(0).getName().equals(FirstHeader)) {
+                DataGrid = Tab.getDataGrid(i);
+                break;
+            }
+        }
         return DataGrid;
     }
 
@@ -52,7 +86,7 @@ public class GetTable {
                 String CurrentHeader = Header.getName();
                 StringValue String1 = new StringValue(CurrentHeader);
                 if (String1 != null) {
-                HeaderValues.add(String1);
+                    HeaderValues.add(String1);
                 }
             }
             HeaderRow.setValues(HeaderValues);
@@ -63,11 +97,11 @@ public class GetTable {
         int RowCount = DataGrid.getRowCount();
         int ColumnCount = DataGrid.getColumnCount();
 
-        for (int i = 0;i < RowCount; i++ ) {
+        for (int i = 0; i < RowCount; i++) {
             Row CurrentRow = new Row();
             List<Value> RowValues = new ArrayList<>();
             for (int g = 0; g < ColumnCount; g++) {
-                RowValues.add(new StringValue(DataGrid.getItem(i,g).getValue()));
+                RowValues.add(new StringValue(DataGrid.getItem(i, g).getValue()));
             }
             CurrentRow.setValues(RowValues);
             TableRows.add(CurrentRow);

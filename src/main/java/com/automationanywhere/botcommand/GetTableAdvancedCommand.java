@@ -4,11 +4,8 @@ import com.automationanywhere.botcommand.data.Value;
 import com.automationanywhere.botcommand.data.impl.TableValue;
 import com.automationanywhere.botcommand.data.model.table.Table;
 import com.automationanywhere.botcommand.exception.BotCommandException;
+import com.automationanywhere.commandsdk.annotations.*;
 import com.automationanywhere.commandsdk.annotations.BotCommand;
-import com.automationanywhere.commandsdk.annotations.CommandPkg;
-import com.automationanywhere.commandsdk.annotations.Execute;
-import com.automationanywhere.commandsdk.annotations.Idx;
-import com.automationanywhere.commandsdk.annotations.Pkg;
 import com.automationanywhere.commandsdk.annotations.rules.NotEmpty;
 import com.automationanywhere.commandsdk.model.AttributeType;
 import mmarquee.automation.AutomationException;
@@ -20,19 +17,16 @@ import java.io.PrintWriter;
 import static com.automationanywhere.commandsdk.model.AttributeType.TEXT;
 import static com.automationanywhere.commandsdk.model.DataType.TABLE;
 
-
 @BotCommand
-
-
 @CommandPkg(
         //Unique name inside a package and label to display.
-        name = "GetAdvantageTable", label = "Get Advantage Table",
+        name = "GetAdvantageTableAdvanced", label = "Get Advantage Table Advanced",
         node_label = "[[Concatenate.node_label]]", description = "[[Concatenate.description]]", icon = "pkg.svg",
 
         //Return type information. return_type ensures only the right kind of variable is provided on the UI.
         return_label = "[[Concatenate.return_label]]", return_type = TABLE, return_required = true)
 
-public class GetTableCommand {
+public class GetTableAdvancedCommand{
     @Execute
     public Value<Table> action(
             @Idx(index = "1", type = TEXT)
@@ -49,6 +43,10 @@ public class GetTableCommand {
             @Pkg(label = "Root Tab Name")
             @NotEmpty
                     String RootTabName,
+            @Idx(index = "3", type = TEXT)
+            @Pkg(label = "Header Name For First Column")
+            @NotEmpty
+                    String HeaderSearch,
             @Idx(index = "4", type = AttributeType.BOOLEAN)
             @Pkg(label = "Get Header?")
             @NotEmpty
@@ -59,7 +57,7 @@ public class GetTableCommand {
         DataGrid DataGrid = null;
 
         try {
-            DataGrid = getTable.FindDataGrid(WindowTitle, ParentViewportID, RootTabName);
+            DataGrid = getTable.FindDataGridAdv(WindowTitle, ParentViewportID, RootTabName, HeaderSearch);
             if (DataGrid == null) {
                 throw new BotCommandException("DataTable not found");
             }
@@ -84,4 +82,5 @@ public class GetTableCommand {
         //Return StringValue.
         return new TableValue(table);
     }
+
 }

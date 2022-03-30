@@ -22,17 +22,9 @@ public class TestCommand {
         TableValue = TestCommand.action(WindowTitle, ParentViewportID, RootTabName, true);
         Table Table = TableValue.get();
         List<Row> Rows = Table.getRows();
-        for (Row CurrentRow: Rows) {
+        for (Row CurrentRow : Rows) {
             System.out.println(CurrentRow.getValues().get(0));
         }
     }
-    /*public void TestGetElement() throws Exception {
-        GetElementTesting TestCommand = new GetElementTesting();
-
-        String WindowTitle = "Advantage - >> Agora Production Area <<";
-        String ParentViewportID = "mainDataViewPort";
-        String RootTabName = "Omnistream Transactions (MSTOSM)";
-
-        TestCommand.GetElement(WindowTitle, ParentViewportID, RootTabName);*/
-    }
+}
 
