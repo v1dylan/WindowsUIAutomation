@@ -11,27 +11,32 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GetElementTesting {
-    public ListValue FindDataGrid(String WindowTitle, String TargetViewportID, String RootTabName) throws AutomationException {
-        ListValue listValue = new ListValue<>();
-        List<Value> Values = new ArrayList<>();
+    public void GetElement(String WindowTitle, String TargetViewportID, String RootTabName) throws AutomationException {
         UIAutomation Automation = UIAutomation.getInstance();
         //Set window
         Window Window = Automation.getDesktopWindow(WindowTitle);
         Window.focus();
-        Values.add(new StringValue("Window: " + Window.getName() + Window.getElement().getAutomationId()));
         //get tab item that holds data table
         Custom TargetViewport = Window.getCustomByAutomationId(TargetViewportID);
-        Values.add(new StringValue("TargetViewport: " + TargetViewport.getName() + TargetViewport.getElement().getAutomationId()));
-        Tab Tab = TargetViewport.getTab(0);
-        Values.add(new StringValue("Tab: " + Tab.getName() + Tab.getElement().getAutomationId()));
-        java.util.List<TabItem> TabItems = Tab.getTabItems();
-        TabItem RootTab = null;
-        int i = 0;
-        for (TabItem CurrentTab : TabItems){
-            Values.add(new StringValue("Tab " + i + ": " + CurrentTab.getName() + CurrentTab.getElement().getAutomationId()));
-            i++;
+        System.out.println("ViewPort: " + TargetViewport.getName() + "Auto ID: " + TargetViewport.getElement().getAutomationId());
+        TabItem Tab = null;
+        for (int i = 0; i < 10; i++ ) {
+           List<TabItem> TabItems = TargetViewport.getTab(i).getTabItems();
+            System.out.println("Looping " + i + "tab count " + TabItems.size());
+           for (TabItem Current : TabItems) {
+               if (Current.getName().equals(RootTabName)) {
+                   Tab = Current;
+                   System.out.println(Tab.getName());
+                   break;
+               }
+           }
+            if (Tab != null) {break;}
         }
-        listValue.set(Values);
-        return listValue;
+        System.out.println(Tab.getDataGrid(0).getRowCount() + Tab.getDataGrid(0).getElement().getAutomationId());
+        System.out.println("Tab: " + Tab.getName() + "Auto ID: " + Tab.getElement().getAutomationId());
+        //java.util.List<TabItem> TabItems = Tab.getTabItems();
+        //for (TabItem CurrentTab : TabItems) {
+         //   System.out.println("Tabs: " + CurrentTab.getName() + "Auto ID: " + CurrentTab.getElement().getAutomationId());
+        //}
     }
 }
