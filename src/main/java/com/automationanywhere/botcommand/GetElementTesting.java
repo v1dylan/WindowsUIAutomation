@@ -31,6 +31,6 @@ public class GetElementTesting {
             if (Tab != null) {break;}
         }
         DataGrid DataGrid = Tab.getDataGrid(0);
-        System.out.println(DataGrid.getName());
+        System.out.println(DataGrid.getItem(0, 0).getValue());
     }
 }
