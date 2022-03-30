@@ -2,15 +2,11 @@ package com.automationanywhere.botcommand;
 
 import com.automationanywhere.botcommand.data.Value;
 import com.automationanywhere.botcommand.data.impl.StringValue;
-import com.automationanywhere.botcommand.data.model.Point;
 import com.automationanywhere.botcommand.data.model.table.Row;
 import com.automationanywhere.botcommand.data.model.table.Table;
-import com.sun.jna.platform.win32.WinDef;
 import mmarquee.automation.AutomationException;
-import mmarquee.automation.Element;
 import mmarquee.automation.UIAutomation;
 import mmarquee.automation.controls.*;
-import mmarquee.automation.pattern.Selection;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,19 +14,19 @@ import java.util.List;
 
 
 public class GetTable {
-    public DataGrid FindDataGrid(String WindowTitle, String TargetViewportID,String RootTabName) throws AutomationException {
+    public DataGrid FindDataGrid(String WindowTitle, String TargetViewportID, String RootTabName) throws AutomationException {
         UIAutomation Automation = UIAutomation.getInstance();
         //Set window
         Window Window = Automation.getDesktopWindow(WindowTitle);
         Window.focus();
         //get tab item that holds data table
-        List<AutomationBase> Elements = Window.getChildren(false);
+        /*List<AutomationBase> Elements = Window.getChildren(false);
         int i = 0;
         for (AutomationBase Current : Elements) {
             i++;
             System.out.println("Element " + i + " " + Current.getElement().getAutomationId());
             System.out.println("Element " + i + " " + Current.getElement().getName());
-        }
+        }*/
         Custom TargetViewport = Window.getCustomByAutomationId(TargetViewportID);
         Tab Tab = TargetViewport.getTab(0);
         List<TabItem> TabItems = Tab.getTabItems();
