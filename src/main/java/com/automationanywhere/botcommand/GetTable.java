@@ -33,13 +33,18 @@ public class GetTable {
         int MaxLoops = TargetViewport.getElementCountByControlType(ControlType.Tab);
         System.out.println(MaxLoops);
         List<Element> Elements = TargetViewport.getElementsByControlType(ControlType.Tab);
+        int i = 0;
         for (Element current : Elements) {
             Tab CurrentTab = new Tab(new ElementBuilder(current));
-            System.out.println(CurrentTab.getTab(0).getName());
+            List<TabItem> Tabs = CurrentTab.getTab(0).getTabItems();
+            for (TabItem tab : Tabs) {
+                System.out.println(tab.getName());
+            }
+            i++;
         }
         try {
-            for (int i = 0; i < MaxLoops; i++) {
-                List<TabItem> TabItems = TargetViewport.getTab(i).getTabItems();
+            for (int g = 0; g < MaxLoops; g++) {
+                List<TabItem> TabItems = TargetViewport.getTab(g).getTabItems();
                 for (TabItem Current : TabItems) {
                     if (Current.getName().equals(RootTabName)) {
                         Tab = Current;
