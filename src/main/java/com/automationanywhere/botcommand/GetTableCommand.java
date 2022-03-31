@@ -27,10 +27,11 @@ import static com.automationanywhere.commandsdk.model.DataType.TABLE;
 @CommandPkg(
         //Unique name inside a package and label to display.
         name = "GetAdvantageTable", label = "Get Advantage Table",
-        node_label = "[[Concatenate.node_label]]", description = "[[Concatenate.description]]", icon = "pkg.svg",
+        node_label = "Get Advantage Table", description = "Finds an Advantage datagrid element and returns an datatable.", icon = "AdvantageIcon.svg",
+        background_color = "9c1414",
 
         //Return type information. return_type ensures only the right kind of variable is provided on the UI.
-        return_label = "[[Concatenate.return_label]]", return_type = TABLE, return_required = true)
+        return_label = "Advantage table converted to datatable", return_type = TABLE, return_required = true)
 
 public class GetTableCommand {
     @Execute
