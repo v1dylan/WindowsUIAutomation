@@ -50,7 +50,7 @@ public class Container extends AutomationBase {
      * @return The matching element.
      * @throws AutomationException Error in the Automation library.
      */
-    Element getElementByControlType(final int index,
+     Element getElementByControlType(final int index,
                                     final ControlType id)
             throws AutomationException {
         PointerByReference condition =
@@ -62,6 +62,19 @@ public class Container extends AutomationBase {
                 new TreeScope(TreeScope.SUBTREE), condition);
 
         return collection.get(index);
+    }
+    public int getElementCountByControlType(
+                                           final ControlType id)
+            throws AutomationException {
+        PointerByReference condition =
+                this.getAutomation().createPropertyCondition(
+                        PropertyID.ControlType.getValue(),
+                        this.createIntegerVariant(id.getValue()));
+
+        java.util.List<Element> collection = this.findAll(
+                new TreeScope(TreeScope.SUBTREE), condition);
+
+        return collection.size();
     }
 
     /**

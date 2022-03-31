@@ -59,6 +59,28 @@ public class Tab extends Container {
         return tabItems;
     }
 
+    public int getTabItemsFoundNumber() {
+        // Now get the list of tab items
+        List<TabItem> tabItems = new ArrayList<>();
+        int count = 0;
+
+        try {
+            List<Element> collection =
+                    this.findAll(new TreeScope(TreeScope.DESCENDANTS),
+                            this.createControlTypeCondition(ControlType.TabItem));
+
+            for (Element elem : collection) {
+                tabItems.add(
+                        new TabItem(new ElementBuilder(elem)
+                                .automation(this.getAutomation())));
+            }
+            count = tabItems.size();
+        } catch (AutomationException ex) {
+            getLogger().error(ex.getMessage());
+        }
+
+        return count;
+    }
     /**
      * Selects the tab with the given name.
      * @param name The name of the tab to select.

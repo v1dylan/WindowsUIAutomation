@@ -5,6 +5,7 @@ import com.automationanywhere.botcommand.data.impl.StringValue;
 import com.automationanywhere.botcommand.data.model.table.Row;
 import com.automationanywhere.botcommand.data.model.table.Table;
 import mmarquee.automation.AutomationException;
+import mmarquee.automation.ControlType;
 import mmarquee.automation.UIAutomation;
 import mmarquee.automation.controls.*;
 
@@ -13,64 +14,47 @@ import java.util.List;
 
 
 public class GetTable {
+
     /*----------------------Get data grid in advantage-------------------------*/
-    public DataGrid FindDataGrid(String WindowTitle, String TargetViewportID, String RootTabName) throws AutomationException {
+    public DataGrid FindDataGrid(String WindowTitle, String TargetViewportID, String RootTabName) throws Exception {
         UIAutomation Automation = UIAutomation.getInstance();
-        //Set window
-        Window Window = Automation.getDesktopWindow(WindowTitle);
-        Window.focus();
-        //get viewport in advantage
-        Custom TargetViewport = Window.getCustomByAutomationId(TargetViewportID);
-        //Find correct tab item under viewport
-        TabItem Tab = null;
-        for (int i = 0; i < 10; i++) {
-            List<TabItem> TabItems = TargetViewport.getTab(i).getTabItems();
-            for (TabItem Current : TabItems) {
-                if (Current.getName().equals(RootTabName)) {
-                    Tab = Current;
-                    break;
-                }
-            }
-            if (Tab != null) {
-                break;
-            }
-        }
-        DataGrid DataGrid = Tab.getDataGrid(0);
-        return DataGrid;
-    }
-
-    /*----------------------Get data grid in advantage advanced-------------------------*/
-    public DataGrid FindDataGridAdv(String WindowTitle, String TargetViewportID, String RootTabName, String FirstHeader) throws AutomationException {
-        UIAutomation Automation = UIAutomation.getInstance();
-        //Set window
-        Window Window = Automation.getDesktopWindow(WindowTitle);
-        Window.focus();
-        //get viewport in advantage
-        Custom TargetViewport = Window.getCustomByAutomationId(TargetViewportID);
-        //Find correct tab item under viewport
-        TabItem Tab = null;
-        for (int i = 0; i < 10; i++) {
-            List<TabItem> TabItems = TargetViewport.getTab(i).getTabItems();
-            for (TabItem Current : TabItems) {
-                if (Current.getName().equals(RootTabName)) {
-                    Tab = Current;
-                    break;
-                }
-            }
-            if (Tab != null) {
-                break;
-            }
-        }
         DataGrid DataGrid = null;
-        for (int i = 0; i < 10; i++) {
-            if (Tab.getDataGrid(i).getColumnHeaders().get(0).getName().equals(FirstHeader)) {
-                DataGrid = Tab.getDataGrid(i);
-                break;
+        //Sets window using window title
+        Window Window = Automation.getDesktopWindow(WindowTitle);
+        Window.focus();
+        //get viewport
+        Custom TargetViewport = Window.getCustomByAutomationId(TargetViewportID);
+        //Find correct tab item and sub tab item
+        TabItem Tab = null;
+        Container Container = null;
+
+
+        int MaxLoops = Window.getElementCountByControlType(ControlType.Tab);
+        System.out.println(MaxLoops);
+        try {
+            for (int i = 0; i < MaxLoops; i++) {
+                List<TabItem> TabItems = TargetViewport.getTab(i).getTabItems();
+                for (TabItem Current : TabItems) {
+                    if (Current.getName().equals(RootTabName)) {
+                        Tab = Current;
+                        break;
+                    }
+                }
+                if (Tab != null) {
+                    break;
+                }
             }
+        }
+        catch (Exception e) {
+            throw new Exception("Unable to find root tab: " + e);
+        }
+        try {
+            DataGrid = Tab.getDataGrid(0);
+        } catch (Exception e) {
+            throw new Exception("Unable to find datagrid: " + e);
         }
         return DataGrid;
     }
-
     /*-------------- Data grid to AA Table ----------------------*/
 
     public Table DataGridToAATable(DataGrid DataGrid, boolean IncludeHeader) throws AutomationException {
