@@ -23,7 +23,7 @@ public class GetTable {
         //Sets window using window title
         Window Window = Automation.getDesktopWindow(WindowTitle);
         Window.focus();
-        //get viewport
+        //Set viewport
         Custom TargetViewport = Window.getCustomByAutomationId(TargetViewportID);
         //Find correct tab item and sub tab item
         TabItem RootTab = null;
@@ -31,7 +31,7 @@ public class GetTable {
         int i = 0;
         for (Element current : Elements) {
             Tab CurrentTab = new Tab(new ElementBuilder(current));
-            List<TabItem> Tabs = CurrentTab.getTab(0).getTabItems();
+            List<TabItem> Tabs = CurrentTab.getTab(i).getTabItems();
             for (TabItem CurrentSubTab : Tabs) {
                 if (CurrentSubTab.getName().equals(RootTabName)) {
                     RootTab = CurrentSubTab;
@@ -43,7 +43,10 @@ public class GetTable {
             }
             i++;
         }
-        return RootTab.getDataGrid(0);
+        if (RootTab != null) {
+            DataGrid = RootTab.getDataGrid(0);
+        }
+        return DataGrid;
     }
     /*-------------- Data grid to AA Table ----------------------*/
 
@@ -58,9 +61,9 @@ public class GetTable {
             List<Value> HeaderValues = new ArrayList<>();
             for (DataGridCell Header : Headers) {
                 String CurrentHeader = Header.getName();
-                StringValue String1 = new StringValue(CurrentHeader);
-                if (String1 != null) {
-                    HeaderValues.add(String1);
+                StringValue String = new StringValue(CurrentHeader);
+                if (String != null) {
+                    HeaderValues.add(String);
                 }
             }
             HeaderRow.setValues(HeaderValues);
