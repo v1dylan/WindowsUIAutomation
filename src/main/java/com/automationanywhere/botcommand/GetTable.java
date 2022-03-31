@@ -26,45 +26,24 @@ public class GetTable {
         //get viewport
         Custom TargetViewport = Window.getCustomByAutomationId(TargetViewportID);
         //Find correct tab item and sub tab item
-        TabItem Tab = null;
-        Container Container = null;
-
-
-        int MaxLoops = TargetViewport.getElementCountByControlType(ControlType.Tab);
-        System.out.println(MaxLoops);
+        TabItem RootTab = null;
         List<Element> Elements = TargetViewport.getElementsByControlType(ControlType.Tab);
         int i = 0;
         for (Element current : Elements) {
             Tab CurrentTab = new Tab(new ElementBuilder(current));
             List<TabItem> Tabs = CurrentTab.getTab(0).getTabItems();
-            for (TabItem tab : Tabs) {
-                System.out.println(tab.getName());
-            }
-            i++;
-        }
-        try {
-            for (int g = 0; g < MaxLoops; g++) {
-                List<TabItem> TabItems = TargetViewport.getTab(g).getTabItems();
-                for (TabItem Current : TabItems) {
-                    if (Current.getName().equals(RootTabName)) {
-                        Tab = Current;
-                        break;
-                    }
-                }
-                if (Tab != null) {
+            for (TabItem CurrentSubTab : Tabs) {
+                if (CurrentSubTab.getName().equals(RootTabName)) {
+                    RootTab = CurrentSubTab;
                     break;
                 }
             }
+            if (RootTab != null) {
+                break;
+            }
+            i++;
         }
-        catch (Exception e) {
-            throw new Exception("Unable to find root tab: " + e);
-        }
-        try {
-            DataGrid = Tab.getDataGrid(0);
-        } catch (Exception e) {
-            throw new Exception("Unable to find datagrid: " + e);
-        }
-        return DataGrid;
+        return RootTab.getDataGrid(0);
     }
     /*-------------- Data grid to AA Table ----------------------*/
 
