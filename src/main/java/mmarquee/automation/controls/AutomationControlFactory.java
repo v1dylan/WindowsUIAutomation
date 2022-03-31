@@ -15,10 +15,7 @@
  */
 package mmarquee.automation.controls;
 
-import mmarquee.automation.AutomationException;
-import mmarquee.automation.ControlType;
-import mmarquee.automation.Element;
-import mmarquee.automation.ElementNotFoundException;
+import mmarquee.automation.*;
 import mmarquee.automation.pattern.PatternNotFoundException;
 
 /**
@@ -85,7 +82,7 @@ public class AutomationControlFactory {
     	case ListItem:
     		return new ListItem(new ElementBuilder(element));
     	case List:
-    		return new List(new ElementBuilder(element));
+    		return new List<BaseAutomation>(new ElementBuilder(element));
     	case Menu:
     		return new Menu(new ElementBuilder(element));
     	case MenuBar:

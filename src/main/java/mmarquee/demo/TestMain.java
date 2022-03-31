@@ -229,7 +229,7 @@ public class TestMain extends TestBase {
                 logger.info("ElementNotFoundException");
             }
 
-            List list =
+            List<BaseAutomation> list =
                     window.getList(
                             Search.getBuilder(0).build());
             try {

@@ -29,7 +29,7 @@ import java.util.regex.Pattern;
  * @author Mark Humphreys
  * Date 26/01/2016.
  */
-public final class List
+public final class List<E extends BaseAutomation>
         extends AutomationBase
         implements ImplementsChildSelect {
 

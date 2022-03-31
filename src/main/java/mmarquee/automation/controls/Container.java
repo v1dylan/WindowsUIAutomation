@@ -63,6 +63,21 @@ public class Container extends AutomationBase {
 
         return collection.get(index);
     }
+
+    public java.util.List<Element> getElementsByControlType(
+                                    final ControlType id)
+            throws AutomationException {
+        PointerByReference condition =
+                this.getAutomation().createPropertyCondition(
+                        PropertyID.ControlType.getValue(),
+                        this.createIntegerVariant(id.getValue()));
+
+        java.util.List<Element> collection = this.findAll(
+                new TreeScope(TreeScope.SUBTREE), condition);
+
+        return collection;
+    }
+
     public int getElementCountByControlType(
                                            final ControlType id)
             throws AutomationException {
@@ -1665,8 +1680,8 @@ public class Container extends AutomationBase {
      * @return The found control
      * @throws AutomationException Something has gone wrong
      */
-    public List getList(final int index) throws AutomationException {
-        return new List(
+    public List<BaseAutomation> getList(final int index) throws AutomationException {
+        return new List<BaseAutomation>(
                 new ElementBuilder(
                         this.getElementByControlType(index,
                                 ControlType.List)));
@@ -1678,8 +1693,8 @@ public class Container extends AutomationBase {
      * @return The found control
      * @throws AutomationException Something has gone wrong
      */
-    public List getList(String name) throws AutomationException {
-        return new List(
+    public List<BaseAutomation> getList(String name) throws AutomationException {
+        return new List<BaseAutomation>(
                 new ElementBuilder(
                         this.getElementByControlType(name, ControlType.List)));
     }
@@ -1690,9 +1705,9 @@ public class Container extends AutomationBase {
      * @return The found control
      * @throws AutomationException Something has gone wrong
      */
-    public List getList(Pattern namePattern)
+    public List<BaseAutomation> getList(Pattern namePattern)
             throws AutomationException {
-        return new List(
+        return new List<BaseAutomation>(
                 new ElementBuilder(
                         this.getElementByControlType(namePattern,
                                 ControlType.List)));
@@ -1704,9 +1719,9 @@ public class Container extends AutomationBase {
      * @return The found control
      * @throws AutomationException Something has gone wrong
      */
-    public List getListByAutomationId(final String automationId)
+    public List<BaseAutomation> getListByAutomationId(final String automationId)
             throws AutomationException {
-        return new List(
+        return new List<BaseAutomation>(
                 new ElementBuilder(
                         this.getElementByAutomationId(automationId,
                                 ControlType.List)));
@@ -2322,7 +2337,7 @@ public class Container extends AutomationBase {
      * @return The found control
      * @throws AutomationException Something has gone wrong
      */
-    public List getList(final Search search)
+    public List<BaseAutomation> getList(final Search search)
             throws AutomationException {
         if (search.getHasNamePattern()) {
             return getList(search.getNamePattern());

@@ -403,7 +403,7 @@ public class TestMainWPF extends TestBase {
 
             logger.info("++ LISTS ++");
 
-            List list =
+            List<BaseAutomation> list =
                     applicationWindow.getList(
                             Search.getBuilder(0).build());
             try {

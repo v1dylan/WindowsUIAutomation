@@ -6,6 +6,7 @@ import com.automationanywhere.botcommand.data.model.table.Row;
 import com.automationanywhere.botcommand.data.model.table.Table;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.ControlType;
+import mmarquee.automation.Element;
 import mmarquee.automation.UIAutomation;
 import mmarquee.automation.controls.*;
 
@@ -31,6 +32,10 @@ public class GetTable {
 
         int MaxLoops = Window.getElementCountByControlType(ControlType.Tab);
         System.out.println(MaxLoops);
+        List<Element> Elements = Window.getElementsByControlType(ControlType.Tab);
+        for (Element current : Elements) {
+            System.out.println("ID: " + current.getAutomationId() + "Name: " + current.getName());
+        }
         try {
             for (int i = 0; i < MaxLoops; i++) {
                 List<TabItem> TabItems = TargetViewport.getTab(i).getTabItems();
