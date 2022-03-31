@@ -27,12 +27,13 @@ public class TestCommand {
             System.out.println(CurrentRow.getValues().get(0));
         }
     }
-    public void TestOpenAdvantage() throws AutomationException {
+    public void TestOpenAdvantage() throws Exception {
+        String LauncherPath = "";
         String WindowTitle = "Advantage - >> Agora Production Area <<";
         String Instance = "Production";
 
         LaunchAdvantage launchAdvantage = new LaunchAdvantage();
-        launchAdvantage.LaunchAdvantage(WindowTitle, Instance);
+        launchAdvantage.LaunchAdvantage(LauncherPath, WindowTitle, Instance);
     }
 }
 

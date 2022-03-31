@@ -10,8 +10,12 @@ import mmarquee.automation.controls.*;
 import java.util.List;
 
 public class LaunchAdvantage {
-    public void LaunchAdvantage(String LaunchPadWindowTitle, String Instance) throws AutomationException {
+    public void LaunchAdvantage(String LauncherPath, String LaunchPadWindowTitle, String Instance) throws Exception {
         UIAutomation Automation = UIAutomation.getInstance();
+        //Launch launchpad
+        Application application = new Application(new ElementBuilder().automation(Automation).applicationPath(LauncherPath));
+        application.launchOrAttach();
+        Automation.wait(10);
         //Set window
         Window Window = Automation.getDesktopWindow(LaunchPadWindowTitle);
         Window.focus();
