@@ -34,7 +34,8 @@ public class GetTable {
         System.out.println(MaxLoops);
         List<Element> Elements = TargetViewport.getElementsByControlType(ControlType.Tab);
         for (Element current : Elements) {
-            System.out.println("ID: " + current.getAutomationId() + "Name: " + current.getName());
+            Tab CurrentTab = new Tab(new ElementBuilder(current));
+            System.out.println(CurrentTab.getTab(0).getName());
         }
         try {
             for (int i = 0; i < MaxLoops; i++) {
