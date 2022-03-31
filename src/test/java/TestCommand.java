@@ -28,12 +28,13 @@ public class TestCommand {
         }
     }
     public void TestOpenAdvantage() throws Exception {
-        String LauncherPath = "";
-        String WindowTitle = "Advantage - >> Agora Production Area <<";
-        String Instance = "Production";
+        String LauncherPath = "C:\\Program Files (x86)\\Advantage\\LaunchPad\\LaunchPad.exe";
+        String WindowTitle = "Advantage LaunchPad";
+        String Instance = "TRAINING";
+        int MaxWait = 5000;
 
         LaunchAdvantage launchAdvantage = new LaunchAdvantage();
-        launchAdvantage.LaunchAdvantage(LauncherPath, WindowTitle, Instance);
+        launchAdvantage.LaunchAdvantage(LauncherPath, WindowTitle, Instance, MaxWait);
     }
 }
 
