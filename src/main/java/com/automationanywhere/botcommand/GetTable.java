@@ -30,9 +30,9 @@ public class GetTable {
         Container Container = null;
 
 
-        int MaxLoops = Window.getElementCountByControlType(ControlType.Tab);
+        int MaxLoops = TargetViewport.getElementCountByControlType(ControlType.Tab);
         System.out.println(MaxLoops);
-        List<Element> Elements = Window.getElementsByControlType(ControlType.Tab);
+        List<Element> Elements = TargetViewport.getElementsByControlType(ControlType.Tab);
         for (Element current : Elements) {
             System.out.println("ID: " + current.getAutomationId() + "Name: " + current.getName());
         }
