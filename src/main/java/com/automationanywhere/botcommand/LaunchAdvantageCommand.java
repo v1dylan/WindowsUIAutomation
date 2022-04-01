@@ -40,12 +40,11 @@ public class LaunchAdvantageCommand {
             @Idx(index = "4", type = NUMBER)
             @Pkg(label = "Time to Wait for Advantage to Launch (Milliseconds)")
             @NotEmpty
-                double MaxWait) {
+                Double MaxWait) {
 
         AdvantageLaunch Launch = new AdvantageLaunch();
-
         try {
-            Launch.LaunchAdvantage(LauncherPath, LaunchpadWindowTitle, Instance, ((int) MaxWait));
+            Launch.LaunchAdvantage(LauncherPath, LaunchpadWindowTitle, Instance, MaxWait.intValue());
         }catch (Exception e) {
             CharArrayWriter cw = new CharArrayWriter();
             PrintWriter w = new PrintWriter(cw);
