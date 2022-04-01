@@ -1,9 +1,8 @@
-package com.automationanywhere.botcommand;
+package AdvantageAutomation;
 
 import com.automationanywhere.botcommand.data.Value;
 import com.automationanywhere.botcommand.data.impl.StringValue;
 import com.automationanywhere.botcommand.data.model.table.Row;
-import com.automationanywhere.botcommand.data.model.table.Table;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.ControlType;
 import mmarquee.automation.Element;
@@ -13,11 +12,9 @@ import mmarquee.automation.controls.*;
 import java.util.ArrayList;
 import java.util.List;
 
-
-public class GetTable {
-
+public class AdvantageTable {
     /*----------------------Get data grid in advantage-------------------------*/
-    public DataGrid FindDataGrid(String WindowTitle, String TargetViewportID, String RootTabName) throws Exception {
+    public DataGrid GetDataGrid(String WindowTitle, String TargetViewportID, String RootTabName) throws Exception {
         UIAutomation Automation = UIAutomation.getInstance();
         DataGrid DataGrid = null;
         //Sets window using window title
@@ -48,10 +45,10 @@ public class GetTable {
         }
         return DataGrid;
     }
-    /*-------------- Data grid to AA Table ----------------------*/
 
-    public Table DataGridToAATable(DataGrid DataGrid, boolean IncludeHeader) throws AutomationException {
-        Table Table = new Table();
+    /*-------------- Data grid to AA Table ----------------------*/
+    public com.automationanywhere.botcommand.data.model.table.Table ToAATable(DataGrid DataGrid, boolean IncludeHeader) throws AutomationException {
+        com.automationanywhere.botcommand.data.model.table.Table Table = new com.automationanywhere.botcommand.data.model.table.Table();
         List<Row> TableRows = new ArrayList<>();
 
         //Set header row
@@ -88,4 +85,3 @@ public class GetTable {
     }
 
 }
-

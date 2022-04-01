@@ -1,5 +1,6 @@
 package com.automationanywhere.botcommand;
 
+import AdvantageAutomation.AdvantageTable;
 import com.automationanywhere.botcommand.data.Value;
 import com.automationanywhere.botcommand.data.impl.TableValue;
 import com.automationanywhere.botcommand.data.model.table.Table;
@@ -56,11 +57,11 @@ public class GetTableCommand {
                     Boolean IncludeHeader) throws AutomationException {
 
         Table table = new Table();
-        GetTable getTable = new GetTable();
+        AdvantageTable AdvantageTable = new AdvantageTable();
         DataGrid DataGrid = null;
 
         try {
-            DataGrid = getTable.FindDataGrid(WindowTitle, ParentViewportID, RootTabName);
+            DataGrid = AdvantageTable.GetDataGrid(WindowTitle, ParentViewportID, RootTabName);
             if (DataGrid == null) {
                 throw new BotCommandException("DataTable not found");
             }
@@ -73,7 +74,7 @@ public class GetTableCommand {
             throw new BotCommandException("Unable to locate datatable: " + trace);
         }
         try {
-            table = getTable.DataGridToAATable(DataGrid, IncludeHeader);
+            table = AdvantageTable.ToAATable(DataGrid, IncludeHeader);
         } catch (Exception e) {
             CharArrayWriter cw = new CharArrayWriter();
             PrintWriter w = new PrintWriter(cw);

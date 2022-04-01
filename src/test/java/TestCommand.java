@@ -1,6 +1,6 @@
+import AdvantageAutomation.AdvantageLaunch;
 import com.automationanywhere.botcommand.GetTableCommand;
-import com.automationanywhere.botcommand.LaunchAdvantage;
-import com.automationanywhere.botcommand.OpenView;
+import com.automationanywhere.botcommand.LaunchAdvantageCommand;
 import com.automationanywhere.botcommand.data.Value;
 import com.automationanywhere.botcommand.data.impl.TableValue;
 import com.automationanywhere.botcommand.data.model.table.Row;
@@ -28,19 +28,14 @@ public class TestCommand {
             System.out.println(CurrentRow.getValues().get(0));
         }
     }
-    /*public void TestOpenAdvantage() throws Exception {
+    public void TestOpenAdvantage() throws Exception {
         String LauncherPath = "C:\\Program Files (x86)\\Advantage\\LaunchPad\\LaunchPad.exe";
         String WindowTitle = "Advantage LaunchPad";
         String Instance = "TRAINING";
-        int MaxWait = 5000;
+        double MaxWait = 5000;
 
-        LaunchAdvantage launchAdvantage = new LaunchAdvantage();
-        launchAdvantage.LaunchAdvantage(LauncherPath, WindowTitle, Instance, MaxWait);
-    }*/
-    public void OpenView() throws AutomationException {
-        OpenView openView = new OpenView();
-
-        openView.OpenView("Advantage - >> Agora Training Area <<", "MSTOSM");
+        LaunchAdvantageCommand launchAdvantage = new LaunchAdvantageCommand();
+        launchAdvantage.action(LauncherPath, WindowTitle, Instance, MaxWait);
     }
 }
 

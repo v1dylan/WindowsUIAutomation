@@ -1,7 +1,6 @@
-package com.automationanywhere.botcommand;
+package AdvantageAutomation;
 
 import mmarquee.automation.AutomationException;
-
 import mmarquee.automation.ControlType;
 import mmarquee.automation.Element;
 import mmarquee.automation.UIAutomation;
@@ -9,23 +8,14 @@ import mmarquee.automation.controls.*;
 
 import java.util.List;
 
-public class LaunchAdvantage {
-    public UIAutomation StartAutomation() {
-        UIAutomation Automation = UIAutomation.getInstance();
-        return Automation;
-    }
-    public Window GetWindow(String WindowTitle, UIAutomation Automation) throws AutomationException {
-        Window AdvantageWindow = Automation.getWindow(WindowTitle);
-        return AdvantageWindow;
-    }
-
+public class AdvantageLaunch {
     public void LaunchAdvantage(String LauncherPath, String LaunchPadWindowTitle, String Instance, int MaxWait) throws Exception {
-        UIAutomation Automation = StartAutomation();
+        UIAutomation Automation = UIAutomation.getInstance();
         //Launch launchpad
         Application application = Automation.launch(LauncherPath);
         application.waitForInputIdle(MaxWait);
         //Set window
-        Window Window = GetWindow(LaunchPadWindowTitle, Automation);
+        Window Window = Automation.getWindow(LaunchPadWindowTitle);
         Window.focus();
         List<Element> Buttons = Window.getElementsByControlType(ControlType.Button);
         boolean buttonisfound = false;
