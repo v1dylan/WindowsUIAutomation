@@ -15,13 +15,25 @@ public class OpenView {
         UIAutomation Automation = Advantage.StartAutomation();
         Window Window = Advantage.GetWindow(WindowTitle, Automation);
         EditBox SearchBox = null;
-        List<Element> toolBar = Window.getElementsByControlType(ControlType.ToolBar);
-        for (Element element : toolBar) {
-            ToolBar toolBar1 = new ToolBar(new ElementBuilder(element));
-            SearchBox = toolBar1.getEditBoxByAutomationId("PART_EditableTextBox");
-        }
+        ToolBar toolBar = Window.getToolBar(0);
+        SearchBox = toolBar.getEditBoxByAutomationId("PART_EditableTextBox");
+
         if (SearchBox != null) {
             SearchBox.setValue(TargetView);
+            ListItem FoundListItem = null;
+           List<Element> ListItems = Window.getElementsByControlType(ControlType.ListItem);
+           for (Element current : ListItems) {
+               ListItem currentList = new ListItem(new ElementBuilder(current));
+               List<AutomationBase> children = currentList.getChildren(false);
+               for (AutomationBase current1 : children) {
+                   if(current1.getElement().getName().equals(TargetView)) {
+                   FoundListItem = currentList;
+                   break;
+                   }
+               }
+               if (FoundListItem != null) {break;}
+           }
+           FoundListItem.click();
         }
     }
 }
