@@ -9,10 +9,9 @@ import mmarquee.automation.controls.*;
 import java.util.List;
 
 public class AdvantageMenuItem {
-    void SelectMenuItem(String AdvantageWindowTitle, String TargetViewportID, String Tab, String MenuItem) throws AutomationException, InterruptedException {
+    public void SelectMenuItem(String AdvantageWindowTitle, String TargetViewportID, String Tab, String MenuItem) throws AutomationException, InterruptedException {
         UIAutomation Automation = UIAutomation.getInstance();
         Window AdvantageWindow = Automation.getWindow(AdvantageWindowTitle);
-        List<Window> Windows = Automation.getDesktopWindows();
         MenuItem foundFilterItem = null;
         MenuItem foundFilterChooseItem = null;
 
@@ -37,39 +36,46 @@ public class AdvantageMenuItem {
         }
         if (RootTab != null) {
             for (Element current : RootTab.getElementsByControlType(ControlType.Button)) {
-                if(current.getAutomationId().matches(".*" + "_CONFIGURE_BUTTON")) {
-                    System.out.println("found button");
+                if (current.getAutomationId().matches(".*" + "_CONFIGURE_BUTTON")) {
+                    Button button = new Button(new ElementBuilder(current));
+                    button.click();
+                    break;
                 }
             }
         }
+        Automation.wait(1000);
 
-
+        List<Window> Windows = Automation.getDesktopWindows();
         for (Window current : Windows) {
             List<Element> menuItems = current.getElementsByControlType(ControlType.Menu);
             for (Element element : menuItems) {
                 MenuItem currentMenuItem = new MenuItem(new ElementBuilder(element));
-                if (currentMenuItem.getName().equals("Choose filter")){
+                if (currentMenuItem.getName().equals("Choose filter")) {
                     foundFilterChooseItem = currentMenuItem;
                     break;
                 }
             }
-            if (foundFilterChooseItem != null) {break;}
+            if (foundFilterChooseItem != null) {
+                break;
+            }
         }
         if (foundFilterChooseItem != null) {
             foundFilterChooseItem.click();
         }
-       Automation.wait(1000);
-       Windows = Automation.getDesktopWindows();
+        Automation.wait(1000);
+        Windows = Automation.getDesktopWindows();
         for (Window current : Windows) {
             List<Element> menuItems = current.getElementsByControlType(ControlType.Menu);
             for (Element element : menuItems) {
                 MenuItem currentMenuItem = new MenuItem(new ElementBuilder(element));
-                if (currentMenuItem.getName().equals(MenuItem)){
+                if (currentMenuItem.getName().equals(MenuItem)) {
                     foundFilterItem = currentMenuItem;
                     break;
                 }
             }
-            if (foundFilterItem != null) {break;}
+            if (foundFilterItem != null) {
+                break;
+            }
         }
         if (foundFilterItem != null) {
             foundFilterItem.click();

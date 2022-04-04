@@ -1,4 +1,5 @@
 import AdvantageAutomation.AdvantageLaunch;
+import AdvantageAutomation.AdvantageMenuItem;
 import com.automationanywhere.botcommand.GetTableCommand;
 import com.automationanywhere.botcommand.LaunchAdvantageCommand;
 import com.automationanywhere.botcommand.data.Value;
@@ -13,7 +14,7 @@ import java.util.List;
 @Test
 
 public class TestCommand {
-    public void TestGetGrid() throws Exception {
+    /*public void TestGetGrid() throws Exception {
         GetTableCommand TestCommand = new GetTableCommand();
 
         String WindowTitle = "Advantage - >> Agora Production Area <<";
@@ -27,8 +28,8 @@ public class TestCommand {
         for (Row CurrentRow : Rows) {
             System.out.println(CurrentRow.getValues().get(0));
         }
-    }
-    public void TestOpenAdvantage() throws Exception {
+    }*/
+    /*public void TestOpenAdvantage() throws Exception {
         String LauncherPath = "C:\\Program Files (x86)\\Advantage\\LaunchPad\\LaunchPad.exe";
         String WindowTitle = "Advantage LaunchPad";
         String Instance = "TRAINING";
@@ -36,6 +37,11 @@ public class TestCommand {
 
         LaunchAdvantageCommand launchAdvantage = new LaunchAdvantageCommand();
         launchAdvantage.action(LauncherPath, WindowTitle, Instance, MaxWait);
+    }*/
+    public void SelectMenuItem() throws AutomationException, InterruptedException {
+        AdvantageMenuItem menu = new AdvantageMenuItem();
+        String WindowTitle = "Advantage - >> Agora Production Area <<";
+        menu.SelectMenuItem(WindowTitle, "mainDataViewPort","Omnistream Transactions (MSTOSM)","OSM Errored Orders");
     }
 }
 
