@@ -34,11 +34,11 @@ public class LaunchAdvantageCommand {
                     String LaunchpadWindowTitle,
 
             @Idx(index = "3", type = TEXT)
-            @Pkg(label = "Advantage Instance to Open")
+            @Pkg(label = "Advantage Instance to Open", description = "Case sensitive")
             @NotEmpty
                     String Instance,
             @Idx(index = "4", type = NUMBER)
-            @Pkg(label = "Time to Wait for Advantage to Launch (Milliseconds)")
+            @Pkg(label = "Time to Wait for Advantage to Launch (ms)")
             @NotEmpty
                 Double MaxWait) {
 

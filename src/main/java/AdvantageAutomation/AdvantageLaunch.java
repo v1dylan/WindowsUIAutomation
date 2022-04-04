@@ -1,6 +1,5 @@
 package AdvantageAutomation;
 
-import mmarquee.automation.AutomationException;
 import mmarquee.automation.ControlType;
 import mmarquee.automation.Element;
 import mmarquee.automation.UIAutomation;
