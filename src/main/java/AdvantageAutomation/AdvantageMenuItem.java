@@ -43,13 +43,13 @@ public class AdvantageMenuItem {
                 }
             }
         }
-        Automation.wait(1000);
 
         List<Window> Windows = Automation.getDesktopWindows();
         for (Window current : Windows) {
             List<Element> menuItems = current.getElementsByControlType(ControlType.Menu);
             for (Element element : menuItems) {
                 MenuItem currentMenuItem = new MenuItem(new ElementBuilder(element));
+                System.out.println(currentMenuItem.getName());
                 if (currentMenuItem.getName().equals("Choose filter")) {
                     foundFilterChooseItem = currentMenuItem;
                     break;
@@ -62,10 +62,12 @@ public class AdvantageMenuItem {
         if (foundFilterChooseItem != null) {
             foundFilterChooseItem.click();
         }
-        Automation.wait(1000);
+
         Windows = Automation.getDesktopWindows();
         for (Window current : Windows) {
             List<Element> menuItems = current.getElementsByControlType(ControlType.Menu);
+            System.out.println(current.getName());
+
             for (Element element : menuItems) {
                 MenuItem currentMenuItem = new MenuItem(new ElementBuilder(element));
                 if (currentMenuItem.getName().equals(MenuItem)) {
